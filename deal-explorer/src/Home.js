@@ -30,7 +30,7 @@ export default function BasicTable() {
             try {
                 const response = await getData();
                 console.log(response)
-                // setApiData(response.data.data.filecoin); // Adjust the property access accordingly
+                setApiData(response); // Adjust the property access accordingly
             } catch (error) {
                 console.error('Error fetching data:', error);
             }
@@ -39,34 +39,40 @@ export default function BasicTable() {
         fetchData();
     }, []); // Empty dependency array ensures the effect runs only once on mount
 
-    
+
     return (
         <TableContainer component={Paper}>
             <Table sx={{ minWidth: 650 }} aria-label="simple table">
                 <TableHead>
                     <TableRow>
-                        <TableCell>Dessert (100g serving)</TableCell>
-                        <TableCell align="right">Calories</TableCell>
-                        <TableCell align="right">Fat&nbsp;(g)</TableCell>
-                        <TableCell align="right">Carbs&nbsp;(g)</TableCell>
-                        <TableCell align="right">Protein&nbsp;(g)</TableCell>
+                        <TableCell>Address</TableCell>
+                        <TableCell align="right">PieceCID</TableCell>
+                        <TableCell align="right">PieceSize</TableCell>
+                        <TableCell align="right">ProviderCollateral</TableCell>
+                        <TableCell align="right">StartEpoch</TableCell>
+                        <TableCell align="right">EndEpoch</TableCell>
                     </TableRow>
                 </TableHead>
                 <TableBody>
-                    {rows.map((row) => (
-                        <TableRow
-                            key={row.name}
-                            sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-                        >
-                            <TableCell component="th" scope="row">
-                                {row.name}
-                            </TableCell>
-                            <TableCell align="right">{row.calories}</TableCell>
-                            <TableCell align="right">{row.fat}</TableCell>
-                            <TableCell align="right">{row.carbs}</TableCell>
-                            <TableCell align="right">{row.protein}</TableCell>
-                        </TableRow>
-                    ))}
+                    {apiData.map((row) => {
+                        console.log(row[0])
+                        return <>
+                            <TableRow
+                                key={row[0]}
+                                sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                            >
+
+                                <TableCell component="th" scope="row">
+                                    {row[5]}
+                                </TableCell>
+                                <TableCell align="right">{row[0]}</TableCell>
+                                <TableCell align="right">{row[1]}</TableCell>
+                                <TableCell align="right">{row[2]}</TableCell>
+                                <TableCell align="right">{row[3]}</TableCell>
+                                <TableCell align="right">{row[4]}</TableCell>
+                            </TableRow>
+                        </>
+                    })}
                 </TableBody>
             </Table>
         </TableContainer>

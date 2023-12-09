@@ -129,12 +129,13 @@ const getData = async () => {
         // Wait for all additional data requests to complete
         const additionalData = await Promise.all(additionalDataPromises);
         const transformedObjects = transformObject(additionalData);
+        transformObject(additionalData);
         // console.log(transformedObjects);
 
         // console.log("allMessages", allMessages);
         // console.log("additionalData", additionalData);
 
-        return { originalResponse: response, additionalData };
+        return transformedObjects;
     } catch (error) {
         console.error(error);
         throw error;
@@ -151,19 +152,36 @@ const extractHashesFromResponse = (response) => {
     });
 
     return allMessages;
-    
+
 };
 
 const transformObject = (_originalObject) => {
 
-    // const filterArrayByDealArray = (_originalObject) => {
-    //     return _originalObject.filter(item => console.log(item));
+    // console.log(_originalObject);
+    const detailedDealInfo = _originalObject.map((item) => {
+        if (item.dealArray !== null) {
 
-    // };
-    // console.log(filterArrayByDealArray())
+            return item.dealArray.decodedParams.Deals.map((individualDeal) => {
+
+                return [
+                    individualDeal.Proposal.PieceCID,
+                    individualDeal.Proposal.PieceSize,
+                    individualDeal.Proposal.ProviderCollateral,
+                    individualDeal.Proposal.StartEpoch,
+                    individualDeal.Proposal.endEpoch,
+                    item.deals.sender.address
+                ];
+            });
+        }
+    })
+    const flattenAndFilterNull = (nestedArray) => {
+        const flattenedArray = nestedArray.flat(1).filter(item => item !== null && item !== undefined);
+        return flattenedArray;
+    };
+    const allDeals = flattenAndFilterNull(detailedDealInfo);
 
 
-    return 0;
+    return allDeals;
 };
 
 export default getData;
