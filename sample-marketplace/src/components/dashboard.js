@@ -4,13 +4,16 @@ import React, { useState, useEffect, useRef } from "react";
 function MyComponent() {
   const [data, setData] = useState(null);
   const [precommitdata, setPrecommitData] = useState(null);
+  const [burndata, setBurnData] = useState(null);
   useEffect(() => {
-
-    getData().then((responseData) => {
-        console.log(">>10 ",responseData.data.data.filecoin)
+    getData()
+      .then((responseData) => {
+        console.log(">>10 ", responseData.data.data.filecoin);
         setData(responseData.data.data.filecoin.publishdeals);
         setPrecommitData(responseData.data.data.filecoin.precommits);
-      }).catch((error) => console.error(error));
+        setBurnData(responseData.data.data.filecoin.storage_burn);
+      })
+      .catch((error) => console.error(error));
   }, []);
 
   if (!data) {
@@ -57,6 +60,25 @@ function MyComponent() {
               <td>{message.sender.address}</td>
               <td>{message.burned}</td>
               <td>{message.date.date}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+      <h2>Latest Storage Burns</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Sender Address</th>
+            <th>Amount Burned</th>
+            <th>Date</th>
+          </tr>
+        </thead>
+        <tbody>
+          {burndata.map((transfer) => (
+            <tr key={transfer.hash}>
+              <td>{transfer.sender.address}</td>
+              <td>{transfer.amount}</td>
+              <td>{transfer.date.date}</td>
             </tr>
           ))}
         </tbody>

@@ -8,7 +8,8 @@ const getData = async () => {
           precommits: messages(
             any: {receiver: {in: ["f01845667", "f02833325", "f0814049"]}}
             method: {is: 6}
-            options: {desc: "date.date", limit: 10}
+            date: {is: "2023-12-07"}
+            options: {limit: 10}
           ) {
             date: date {
               date(format: "%Y-%m-%d")
@@ -38,9 +39,9 @@ const getData = async () => {
           }
           publishdeals: messages(
             any: {receiver: {is: "f05"}}
+            date: {is: "2023-12-07"}
             options: {limit: 10}
             method: {is: 4}
-            date: {is: "2023-10-10"}
           ) {
             date: date {
               date(format: "%Y-%m-%d")
@@ -70,8 +71,29 @@ const getData = async () => {
             refund
             returnValue
           }
+          storage_burn: transfers(
+            transferType: {is: burn}
+            date: {is: "2023-12-07"}
+            options: {limit: 10}
+          ) {
+            transferType
+            receiver {
+              address
+            }
+            sender {
+              address
+            }
+            amount
+            date {
+              date(format: "%Y-%m-%d")
+            }
+            hash
+          }
         }
-      }`,
+      }
+      
+      
+    `,
     });
 
     const config = {
@@ -79,13 +101,13 @@ const getData = async () => {
       url: "https://graphql.bitquery.io",
       headers: {
         "Content-Type": "application/json",
-        "X-API-KEY": "your key", // Replace with your own Bitquery API key
+        "X-API-KEY": "BQY4Sr6zf8oD1rPVq5ZTqVoQnKAjCh8Z", // Replace with your own Bitquery API key
       },
       data,
     };
 
     const response = await axios(config);
-    console.log("response ",response)
+    console.log("response ", response);
     return response;
   } catch (error) {
     console.error(error);
