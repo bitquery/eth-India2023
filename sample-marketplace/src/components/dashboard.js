@@ -1,6 +1,17 @@
 import getData from "../bitquery/data";
 import React, { useState, useEffect, useRef } from "react";
 
+const renderClickableAddress = (address) => (
+  <a href="#" onClick={() => handleClick(address)}>
+    {address}
+  </a>
+);
+function handleClick(address) {
+  // Open a new tab with the provided address
+  window.open(`https://explorer.bitquery.io/filecoin/address/${address}/graph`, "_blank");
+}
+
+
 function MyComponent() {
   const [data, setData] = useState(null);
   const [precommitdata, setPrecommitData] = useState(null);
@@ -36,7 +47,7 @@ function MyComponent() {
           {data.map((message) => (
             <tr key={message.signedHash}>
               <td>{message.sender.account}</td>
-              <td>{message.sender.address}</td>
+              <td>{renderClickableAddress(message.sender.address)}</td>
               <td>{message.burned}</td>
               <td>{message.date.date}</td>
             </tr>
@@ -57,7 +68,7 @@ function MyComponent() {
           {precommitdata.map((message) => (
             <tr key={message.signedHash}>
               <td>{message.sender.account}</td>
-              <td>{message.sender.address}</td>
+              <td>{renderClickableAddress(message.sender.address)}</td>
               <td>{message.burned}</td>
               <td>{message.date.date}</td>
             </tr>
@@ -76,7 +87,7 @@ function MyComponent() {
         <tbody>
           {burndata.map((transfer) => (
             <tr key={transfer.hash}>
-              <td>{transfer.sender.address}</td>
+           <td>{renderClickableAddress(transfer.sender.address)}</td>
               <td>{transfer.amount}</td>
               <td>{transfer.date.date}</td>
             </tr>
