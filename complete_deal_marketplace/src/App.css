@@ -6,6 +6,13 @@ body {
   margin: 0;
   padding: 0;
 }
+.dashboard-metric {
+  font-size: 24px;
+  font-weight: bold;
+  color: #3366ff; /* Change color as needed */
+  margin-top: 20px; /* Adjust spacing as desired */
+  /* Add any additional styles for emphasis */
+}
 
 .App {
   text-align: center;
