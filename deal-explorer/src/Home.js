@@ -6,6 +6,7 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
+import { Button } from '@mui/material';
 
 import getData from './data';
 
@@ -46,11 +47,13 @@ export default function BasicTable() {
                 <TableHead>
                     <TableRow>
                         <TableCell>Address</TableCell>
-                        <TableCell align="right">PieceCID</TableCell>
-                        <TableCell align="right">PieceSize</TableCell>
-                        <TableCell align="right">ProviderCollateral</TableCell>
-                        <TableCell align="right">StartEpoch</TableCell>
-                        <TableCell align="right">EndEpoch</TableCell>
+                        <TableCell align="center">PieceCID</TableCell>
+                        <TableCell align="center">PieceSize</TableCell>
+                        <TableCell align="center">ProviderCollateral</TableCell>
+                        <TableCell align="center">StartEpoch</TableCell>
+                        <TableCell align="center">EndEpoch</TableCell>
+                        <TableCell align="center">Accept Deal</TableCell>
+
                     </TableRow>
                 </TableHead>
                 <TableBody>
@@ -65,11 +68,12 @@ export default function BasicTable() {
                                 <TableCell component="th" scope="row">
                                     {row[5]}
                                 </TableCell>
-                                <TableCell align="right">{row[0]}</TableCell>
-                                <TableCell align="right">{row[1]}</TableCell>
-                                <TableCell align="right">{row[2]}</TableCell>
-                                <TableCell align="right">{row[3]}</TableCell>
-                                <TableCell align="right">{row[4]}</TableCell>
+                                <TableCell align="center">{row[0]}</TableCell>
+                                <TableCell align="center">{row[1]}</TableCell>
+                                <TableCell align="center">{row[2]}</TableCell>
+                                <TableCell align="center">{row[3]}</TableCell>
+                                <TableCell align="center">{row[4]}</TableCell>
+                                <TableCell align="center"><Button disabled={true} >Accept</Button></TableCell>
                             </TableRow>
                         </>
                     })}
