@@ -1,9 +1,9 @@
 import axios from "axios";
 
 const getData = async () => {
-  try {
-    const data = JSON.stringify({
-      query: `{
+	try {
+		const data = JSON.stringify({
+			query: `{
         filecoin(network: filecoin) {
           precommits: messages(
             any: {receiver: {in: ["f01845667", "f02833325", "f0814049"]}}
@@ -94,40 +94,41 @@ const getData = async () => {
       
       
     `,
-    });
+		});
 
-    const config = {
-      method: "post",
-      url: "https://graphql.bitquery.io",
-      headers: {
-        "Content-Type": "application/json",
-        "X-API-KEY": "BQY4Sr6zf8oD1rPVq5ZTqVoQnKAjCh8Z", // Replace with your own Bitquery API key
-      },
-      data,
-    };
+		const config = {
+			method: "post",
+			url: "https://graphql.bitquery.io",
+			headers: {
+				"Content-Type": "application/json",
+				"X-API-KEY": "BQY4Sr6zf8oD1rPVq5ZTqVoQnKAjCh8Z", // Replace with your own Bitquery API key
+			},
+			data,
+		};
 
-    const response = await axios(config);
-    console.log("response ", response);
+		console.log("API Called!!!!")
+		const response = await axios(config);
+		console.log("response ", response);
 
-    // Extracting hashes from the response data
-    const allHashes = [];
-    // Extracting hashes from precommits
-    response.data.data.filecoin.precommits.forEach((message) => {
-      allHashes.push(message.signedHash);
-    });
+		// Extracting hashes from the response data
+		const allHashes = [];
+		// Extracting hashes from precommits
+		response.data.data.filecoin.precommits.forEach((message) => {
+			allHashes.push(message.signedHash);
+		});
 
-    // Extracting hashes from publishdeals
-    response.data.data.filecoin.publishdeals.forEach((message) => {
-      allHashes.push(message.signedHash);
-    });
+		// Extracting hashes from publishdeals
+		response.data.data.filecoin.publishdeals.forEach((message) => {
+			allHashes.push(message.signedHash);
+		});
 
-    console.log("allHashes ", allHashes);
+		console.log("allHashes ", allHashes);
 
-    return response;
-  } catch (error) {
-    console.error(error);
-    throw error;
-  }
+		return response;
+	} catch (error) {
+		console.error(error);
+		throw error;
+	}
 };
 
 export default getData;
