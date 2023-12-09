@@ -1,0 +1,47 @@
+/* Add this CSS to your stylesheet */
+
+body {
+  font-family: 'Arial', sans-serif;
+  background-color: #ffffff;
+  margin: 0;
+  padding: 0;
+}
+
+.App {
+  text-align: center;
+  padding: 20px;
+}
+
+.dashboard-title {
+  font-size: 32px;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+.data-table-container {
+  background-color: #e8e8e8;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  margin-bottom: 20px;
+}
+
+.data-table-container h2 {
+  background-color: #1362e1;
+  color: #fff;
+  padding: 10px;
+  margin: 0;
+  font-size: 20px;
+}
+
+MuiDataGrid-root {
+  color: #333;
+}
+
+.bold-cell {
+  font-weight: lighter;
+}
+
+
+
+/* Customize other styles as needed */
