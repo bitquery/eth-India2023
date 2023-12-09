@@ -1,14 +1,18 @@
+import { BrowserRouter, Route, Routes } from "react-router-dom"
 
 import './App.css';
-import styled from '@emotion/styled'
-import material from '@mui/material'
-import BasicTable from "./Home";
+
+import Home from "./Home";
+import AccountData from "./components/AccountData";
 
 function App() {
 	return (
-		<div className="App">
-			<BasicTable />
-		</div>
+		<BrowserRouter>
+			<Routes className="App">
+				<Route path="/" exact Component={Home} />
+				<Route path="/address/:address" exact Component={AccountData} />
+			</Routes>
+		</BrowserRouter>
 	);
 }
 

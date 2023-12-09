@@ -125,7 +125,7 @@ const transformObject = (_originalObject) => {
                 
                     return `${prefix}...${suffix}`;
                 }
-                const shortAddress = shortenAddress(item.deals.sender.address);
+
                 const shortPieceCID = shortenAddress(individualDeal.Proposal.PieceCID)
 
                 return [
@@ -134,7 +134,7 @@ const transformObject = (_originalObject) => {
                     individualDeal.Proposal.ProviderCollateral,
                     individualDeal.Proposal.StartEpoch ,
                     individualDeal.Proposal.endEpoch,
-                    shortAddress
+                    item.deals.sender.account
                 ];
             });
         }
