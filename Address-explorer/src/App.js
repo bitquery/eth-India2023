@@ -6,7 +6,7 @@ const flattenRow = (originalRow, index) => ({
   id: index + 1,
   date: originalRow.date?.date || '',
   blockHeight: originalRow.block?.height || 0,
-  blockTime: originalRow.block?.timestamp.time || 0,
+  blockTime: originalRow.block?.timestamp?.time || 0,
   senderAccount: originalRow.sender?.account || '',
   receiverAccount: originalRow.receiver?.account || '',
   senderAddress: originalRow.sender?.address || '',
@@ -46,10 +46,11 @@ const columns2 = [
 ];
 
 const columns3 = [
-  { field: 'transferType', headerName: 'Transfer Type', flex: 1 },
+  { field: 'blockTime', headerName: 'blockTime', flex: 1 },
   { field: 'senderAddress', headerName: 'Sender Account', flex: 1 },
   { field: 'receiverAddress', headerName: 'Receiver Account', flex: 1 },
   { field: 'hash', headerName: 'Hash', flex: 1 },
+  { field: 'transferType', headerName: 'Transfer Type', flex: 1 },
   { field: 'amount', headerName: 'Amount', flex: 1 }
 ];
 
@@ -98,7 +99,7 @@ function App() {
 
         console.log("API Response:", result);
 
-        const publishDeals = result?.data?.filecoin?.publishdeals || [];
+        const publishDeals = result?.data?.filecoin?.messages || [];
         const formattedRows = publishDeals.map((deal, index) => flattenRow(deal, index)) || [];
 
         console.log("Formatted Rows:", formattedRows);
@@ -196,7 +197,7 @@ function App() {
         <DataTable rows={apiDataStorageCommits} col={columns2} />
       </div>
       <div className="data-table-container">
-        <h2>Past Collateral Slashing</h2>
+        <h2>Slashing</h2>
         <DataTable rows={apiDataStorageCommit} col={columns3} />
       </div>
     </div>
