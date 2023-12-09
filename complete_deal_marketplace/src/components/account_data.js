@@ -69,7 +69,7 @@ const DataTable = ({ rows, col }) => (
   </div>
 );
 
-function App() {
+function account_data() {
   const [apiData, setApiData] = useState([]);
   const [apiDataStorageCommits, setApiDataStorageCommits] = useState([]);
   const [apiDataStorageCommit, setApiDataStorageCommit] = useState([]);
@@ -203,4 +203,4 @@ function App() {
   );
 }
 
-export default App;
+export default account_data;
