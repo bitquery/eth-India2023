@@ -31,11 +31,35 @@ function MyComponent() {
     return <p>Loading...</p>;
   }
 
+  const styles = {
+    table: {
+      borderCollapse: "collapse",
+      width: "100%",
+    },
+    thead: {
+      backgroundColor: "#f1f1f1",
+      fontSize: "16px",
+    },
+    tbody: {
+      backgroundColor: "#fff",
+      fontSize: "14px",
+    },
+  
+    a: {
+      color: "#000",
+      textDecoration: "none",
+      fontWeight: "bold",
+      ":hover": {
+        textDecoration: "underline",
+      },
+    },
+  };
+
   return (
     <div>
       <h2>Latest Deals</h2>
-      <table>
-        <thead>
+      <table style={styles.table}>
+        <thead style={styles.thead}>
           <tr>
             <th>Sender Account</th>
             <th>Sender Address</th>
@@ -43,7 +67,7 @@ function MyComponent() {
             <th>Date</th>
           </tr>
         </thead>
-        <tbody>
+        <tbody style={styles.tbody}>
           {data.map((message) => (
             <tr key={message.signedHash}>
               <td>{message.sender.account}</td>
@@ -53,10 +77,10 @@ function MyComponent() {
             </tr>
           ))}
         </tbody>
-      </table>
+      </table >
       <h2>Latest Storage Commits</h2>
-      <table>
-        <thead>
+      <table style={styles.table}>
+        <thead style={styles.thead}>
           <tr>
             <th>Sender Account</th>
             <th>Sender Address</th>
@@ -64,7 +88,7 @@ function MyComponent() {
             <th>Date</th>
           </tr>
         </thead>
-        <tbody>
+        <tbody style={styles.tbody}>
           {precommitdata.map((message) => (
             <tr key={message.signedHash}>
               <td>{message.sender.account}</td>
@@ -76,15 +100,15 @@ function MyComponent() {
         </tbody>
       </table>
       <h2>Latest Storage Burns</h2>
-      <table>
-        <thead>
+      <table style={styles.table}>
+        <thead style={styles.thead}>
           <tr>
-            <th>Sender Address</th>
+            <th>Sender Account</th>
             <th>Amount Burned</th>
             <th>Date</th>
           </tr>
         </thead>
-        <tbody>
+        <tbody style={styles.tbody}>
           {burndata.map((transfer) => (
             <tr key={transfer.hash}>
            <td>{renderClickableAddress(transfer.sender.address)}</td>
