@@ -7,7 +7,7 @@ const flattenRow = (originalRow, index) => ({
   id: index + 1,
   date: originalRow.date?.date || "",
   blockHeight: originalRow.block?.height || 0,
-  blockTime: originalRow.block?.timestamp.time || 0,
+  blockTime: originalRow.block?.timestamp?.time || 0,
   senderAccount: originalRow.sender?.account || "",
   receiverAccount: originalRow.receiver?.account || "",
   senderAddress: originalRow.sender?.address || "",
@@ -108,11 +108,11 @@ function AccountData(props) {
 
         console.log(" >>109 API Response:", result);
 
-        const publishDeals = result?.data?.filecoin?.publishdeals || [];
-        const formattedRows =
-          publishDeals.map((deal, index) => flattenRow(deal, index)) || [];
+        const publishDeals = result?.data?.filecoin?.messages || [];
+        console.log(">>publishDeals:", publishDeals);
+        const formattedRows = publishDeals.map((deal, index) => flattenRow(deal, index)) || [];
 
-        console.log("Formatted Rows:", formattedRows);
+        console.log(">>Formatted Rows:", formattedRows);
 
         setApiData(formattedRows);
       } catch (error) {
