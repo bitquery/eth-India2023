@@ -99,7 +99,7 @@ function MyComponent() {
           ))}
         </tbody>
       </table>
-      <h2>Latest Storage Burns</h2>
+      <h2>Latest Storage Burns/Reduction</h2>
       <table style={styles.table}>
         <thead style={styles.thead}>
           <tr>

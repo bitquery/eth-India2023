@@ -108,6 +108,21 @@ const getData = async () => {
 
     const response = await axios(config);
     console.log("response ", response);
+
+    // Extracting hashes from the response data
+    const allHashes = [];
+    // Extracting hashes from precommits
+    response.data.data.filecoin.precommits.forEach((message) => {
+      allHashes.push(message.signedHash);
+    });
+
+    // Extracting hashes from publishdeals
+    response.data.data.filecoin.publishdeals.forEach((message) => {
+      allHashes.push(message.signedHash);
+    });
+
+    console.log("allHashes ", allHashes);
+
     return response;
   } catch (error) {
     console.error(error);
