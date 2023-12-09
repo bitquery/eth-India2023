@@ -162,14 +162,26 @@ const transformObject = (_originalObject) => {
         if (item.dealArray !== null) {
 
             return item.dealArray.decodedParams.Deals.map((individualDeal) => {
+                function shortenAddress(address) {
+                    if (typeof address !== 'string' || address.length < 7) {
+                        return address; // Return the original address if it's not a string or too short
+                    }
+                
+                    const prefix = address.substring(0, 4);
+                    const suffix = address.substring(address.length - 5);
+                
+                    return `${prefix}...${suffix}`;
+                }
+                const shortAddress = shortenAddress(item.deals.sender.address);
+                const shortPieceCID = shortenAddress(individualDeal.Proposal.PieceCID)
 
                 return [
-                    individualDeal.Proposal.PieceCID,
+                    shortPieceCID,
                     individualDeal.Proposal.PieceSize,
                     individualDeal.Proposal.ProviderCollateral,
                     individualDeal.Proposal.StartEpoch,
                     individualDeal.Proposal.endEpoch,
-                    item.deals.sender.address
+                    shortAddress
                 ];
             });
         }
