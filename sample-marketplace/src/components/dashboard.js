@@ -61,8 +61,8 @@ function MyComponent() {
       <table style={styles.table}>
         <thead style={styles.thead}>
           <tr>
-            <th>Sender Account</th>
-            <th>Sender Address</th>
+            <th>StorageProvider Account</th>
+            <th>StorageProvider Address</th>
             <th>Burned</th>
             <th>Date</th>
           </tr>
@@ -82,8 +82,8 @@ function MyComponent() {
       <table style={styles.table}>
         <thead style={styles.thead}>
           <tr>
-            <th>Sender Account</th>
-            <th>Sender Address</th>
+            <th>StorageProvider Account</th>
+            <th>StorageProvider Address</th>
             <th>Burned</th>
             <th>Date</th>
           </tr>
@@ -103,8 +103,8 @@ function MyComponent() {
       <table style={styles.table}>
         <thead style={styles.thead}>
           <tr>
-            <th>Sender Account</th>
-            <th>Amount Burned</th>
+            <th>StorageProvider Account</th>
+            <th>Storage Burned</th>
             <th>Date</th>
           </tr>
         </thead>
