@@ -6,38 +6,7 @@ const getData = async () => {
         const graphqlQuery = `
             {
                 filecoin(network: filecoin) {
-                    precommits: messages(
-                        any: { receiver: { in: ["f01845667", "f02833325", "f0814049"] } }
-                        method: { is: 6 }
-                        date: { is: "2023-12-07" }
-                        options: { limit: 10 }
-                    ) {
-                        date: date {
-                            date(format: "%Y-%m-%d")
-                        }
-                        block {
-                            height
-                        }
-                        sender {
-                            account
-                            address
-                            type
-                        }
-                        receiver {
-                            account
-                            address
-                            type
-                        }
-                        method {
-                            id
-                            name
-                        }
-                        burned
-                        amount
-                        signedHash
-                        signatureType
-                        signature
-                    }
+                    
                     publishdeals: messages(
                         any: { receiver: { is: "f05" } }
                         date: { is: "2023-12-07" }
@@ -72,24 +41,7 @@ const getData = async () => {
                         refund
                         returnValue
                     }
-                    storage_burn: transfers(
-                        transferType: { is: burn }
-                        date: { is: "2023-12-07" }
-                        options: { limit: 10 }
-                    ) {
-                        transferType
-                        receiver {
-                            address
-                        }
-                        sender {
-                            address
-                        }
-                        amount
-                        date {
-                            date(format: "%Y-%m-%d")
-                        }
-                        hash
-                    }
+                    
                 }
             }
         `;
@@ -162,6 +114,7 @@ const transformObject = (_originalObject) => {
         if (item.dealArray !== null) {
 
             return item.dealArray.decodedParams.Deals.map((individualDeal) => {
+
                 function shortenAddress(address) {
                     if (typeof address !== 'string' || address.length < 7) {
                         return address; // Return the original address if it's not a string or too short
@@ -179,7 +132,7 @@ const transformObject = (_originalObject) => {
                     shortPieceCID,
                     individualDeal.Proposal.PieceSize,
                     individualDeal.Proposal.ProviderCollateral,
-                    individualDeal.Proposal.StartEpoch,
+                    individualDeal.Proposal.StartEpoch ,
                     individualDeal.Proposal.endEpoch,
                     shortAddress
                 ];
